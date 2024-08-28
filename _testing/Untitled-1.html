@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Font Preview & SVG Export Tool - Vorschau von Schriftarten und Export als SVG-Datei.">
+    <meta name="author" content="Erik Slevin">
+    <meta name="keywords" content="Schriftarten, Font Preview, SVG Export, Google Fonts, Web Fonts, Typografie">
+    <meta name="theme-color" content="#ffffff">
+ 
+    <title>Font Preview & SVG Export Tool</title>
+
+    <!-- Preconnect für Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="container">
+    <div id="loadingScreen" class="loading-screen">
+        <p>Loading fonts...</p>
+    </div>
+    <!-- Mode Toggle Buttons -->
+    <div class="mode-toggle">
+        <button id="modeToggle" class="btn">
+            <span id="modeText" class="mode-text">Dark Mode</span>
+            <i id="toggleOffIcon" class="fa-solid fa-toggle-off"></i>
+            <i id="toggleOnIcon" class="fa-solid fa-toggle-on"></i>
+        </button>
+    </div>
+
+    <h1 class="my-4 text-center">Font Preview & SVG Export Tool</h1>
+
+    <!-- Zeile für Beispieltext, Schriftartauswahl und Schriftgröße -->
+    <div class="row mb-5">
+        <div class="col-12 mt-5 mb-2">
+            <div id="fontRectangle">
+                <span id="rectangleText">John Doe</span>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <label for="sampleTextInput" class="form-label">Enter sample text:</label>
+            <input type="text" id="sampleTextInput" class="form-control form-control-lg" placeholder="John Doe">
+        </div>
+        <div class="col-md-4">
+            <label for="fontSelect" class="form-label">Select font:</label>
+            <select id="fontSelect" class="form-select form-select-lg"></select>
+        </div>
+    </div>
+    <button id="saveSVGButton">Save as SVG</button> <!-- Button zum Speichern der SVG-Datei -->
+    <!-- Akkordeon für Schriftvorschau -->
+    <div class="accordion" id="fontAccordion">
+        <div class="accordion-item">
+            <h4 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFontPreview" aria-expanded="false" aria-controls="collapseFontPreview">
+                    Font Preview
+                </button>
+            </h4>
+            <div id="collapseFontPreview" class="accordion-collapse collapse" aria-labelledby="headingFontPreview" data-bs-parent="#fontAccordion">
+                <div class="accordion-body">
+                    <!-- Container für die Schriftarten -->
+                    <div id="fontsContainer" class="row"></div>
+    
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center" id="pagination"></ul>
+                    </nav>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

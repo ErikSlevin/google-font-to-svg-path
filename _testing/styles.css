@@ -1,0 +1,213 @@
+/* Basis-Schriftart für den gesamten Körper der Seite */
+body {
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s, color 0.3s; /* Sanfte Übergänge für Hintergrund- und Textfarbe */
+}
+
+
+/* Spezifische Schriftart und Schriftgröße für den Titel */
+h1, h2, h3, h4 {
+    font-size: 50px; /* Sicherstellen, dass die Schriftgröße mindestens so groß ist wie im Rechteck */
+    text-align: center; /* Zentriert den Titel */
+    margin-bottom: 20px; /* Abstand unter dem Titel */
+    font-weight: 600;
+}
+
+/* Feste Schriftgröße für das Rechteck, aber responsive Anpassung auf kleineren Bildschirmen */
+#fontRectangle {
+    background-color: #f8f9fa; /* Hintergrundfarbe im Light Mode */
+    border: 1px solid #ced4da; /* Rahmenfarbe */
+    border-radius: 8px; /* Kleiner Radius für abgerundete Ecken */
+    padding: 20px;
+    font-size: 90px; /* Schriftgröße im Rechteck */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+    #fontRectangle {
+        font-size: 25px; /* Kleinere Schriftgröße für Handys */
+    }
+
+    h1 {
+        font-size: 30px; /* Entsprechende Schriftgröße für Handys */
+    }
+}
+
+/* Light Mode */
+body.light-mode {
+    background-color: #ffffff; /* Hintergrundfarbe für den Light Mode */
+    color: #000000; /* Textfarbe für den Light Mode */
+}
+
+body.light-mode #fontRectangle {
+    background-color: #f8f9fa; /* Hintergrundfarbe für das Rechteck im Light Mode */
+    border: 1px solid #ced4da; /* Rahmenfarbe für das Rechteck */
+}
+
+body.light-mode .accordion-item {
+    background-color: #f8f9fa; /* Hintergrundfarbe für das Rechteck im Light Mode */
+    border: 1px solid #ced4da; /* Rahmenfarbe für das Rechteck */
+}
+
+body.light-mode .accordion-button {
+    color: #000000; /* Textfarbe des Akkordeon-Headers im Light Mode */
+    background-color: #f8f9fa; /* Hintergrundfarbe des Akkordeon-Headers */
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #1c1e21; /* Hintergrundfarbe für den Dark Mode */
+    color: #ffffff; /* Textfarbe für den Dark Mode */
+}
+
+body.dark-mode #fontRectangle {
+    background-color: #1f2124; /* Hintergrundfarbe für das Rechteck im Dark Mode */
+    border: 1px solid #495057; /* Rahmenfarbe für das Rechteck im Dark Mode */
+}
+
+body.dark-mode .accordion-item {
+    background-color: #1f2124; /* Hintergrundfarbe für das Rechteck im Dark Mode */
+    border: 1px solid #495057; /* Rahmenfarbe für das Rechteck im Dark Mode */
+}
+
+body.dark-mode .accordion-button {
+    color: #ffffff; /* Textfarbe des Akkordeon-Headers im Dark Mode */
+    background-color: #1f2124; /* Hintergrundfarbe des Akkordeon-Headers */
+}
+
+/* Pfeile im Akkordeon anpassen */
+.accordion-button::after {
+    content: ''; /* Kein Standard-Inhalt */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2 5L8 11L14 5'/></svg>");
+    background-size: 1em;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s ease; /* Sanfte Übergangsanimation für die Drehung des Pfeils */
+    margin-left: auto; /* Verschiebt den Pfeil an das rechte Ende des Buttons */
+}
+
+/* Pfeil für das offene Akkordeon */
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2 5L8 11L14 5'/></svg>");
+    transform: rotate(180deg); /* Pfeil nach oben drehen */
+}
+
+/* Helle Pfeile im Dark Mode */
+body.dark-mode .accordion-button::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ccc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2 5L8 11L14 5'/></svg>");
+}
+
+/* Dunkle Pfeile im Light Mode */
+body.light-mode .accordion-button::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2 5L8 11L14 5'/></svg>");
+}
+
+/* Positioniere die Mode Toggle Buttons oben rechts */
+.mode-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Allgemeine Stile für die Buttons */
+.mode-toggle .btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 24px; /* Größe der Icons */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Abstand zwischen Icon und Text */
+    transition: color 0.3s;
+}
+
+/* Text für Modusbeschriftung */
+.mode-text {
+    font-size: 12px; /* Kleinere Schriftgröße für den Modus-Text */
+    color: #666; /* Grauer Text für besseres Aussehen */
+}
+
+/* Standardmäßig alle Icons ausblenden */
+.mode-toggle .fa {
+    display: none;
+}
+
+/* Toggle Icons im Light Mode */
+body.light-mode #toggleOffIcon {
+    display: inline;
+    color: #000; /* Farbe für Light-Mode */
+}
+
+body.light-mode #toggleOnIcon {
+    display: none; /* Toggle-On Icon nur im Dark-Mode anzeigen */
+}
+
+body.light-mode #modeText {
+    content: 'Dark Mode'; /* Text für Light-Mode */
+}
+
+/* Toggle Icons im Dark Mode */
+body.dark-mode #toggleOffIcon {
+    display: none; /* Toggle-Off Icon nur im Light-Mode anzeigen */
+}
+
+body.dark-mode #toggleOnIcon {
+    display: inline;
+    color: #fff; /* Farbe für Dark-Mode */
+}
+
+body.dark-mode #modeText {
+    content: 'Light Mode'; /* Text für Dark-Mode */
+}
+
+/* Gemeinsame Stilregel für Inputfelder und Selects im Dark Mode */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: #1f2124; ; /* Dunkler Hintergrund für Inputfelder und Selects */
+    color: #fff; /* Helle Textfarbe für Inputfelder und Selects */
+    border: 1px solid #495057; /* Rahmenfarbe für das Rechteck im Dark Mode */
+}
+
+/* Stilregel für Labels im Dark Mode */
+body.dark-mode .form-label {
+    color: #ddd; /* Helle Textfarbe für Labels */
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-size: 1.5em;
+}
+
+/* Entferne die Unterstreichung von Links */
+.font-card-link {
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    color: inherit; /* Erbt die Textfarbe vom übergeordneten Element */
+}
+
+/* Optional: Stelle sicher, dass der Link keine Standard-Link-Stile wie Hover-Effekte hat */
+.font-card-link:hover {
+    text-decoration: none; /* Entfernt die Unterstreichung beim Hover-Effekt */
+    color: inherit; /* Erbt die Textfarbe vom übergeordneten Element */
+}
+
+/* Optional: Wenn du die Klick-Animation entfernen möchtest */
+.font-card-link:active {
+    outline: none; /* Entfernt den Rahmen bei Klick */
+}

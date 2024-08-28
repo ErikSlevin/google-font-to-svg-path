@@ -291,21 +291,50 @@ class App {
         select.options.add(option);
     }
 
+    const excludedFonts = [
+        "Anek", "Akronim", "Almendra SC", "Asul", "Bangers", "Barlow", "Baumans", 
+        "Battambang", "Baskervville", "Basic", "Barrio", "Barriecito", "Be Vietnam Pro", 
+        "Beau Rivage", "Bebas Neue", "Beiruti", "Belanosima", "Belgrano", "Bell",
+        "Cantora One", "Caramel", "Carter One", "Comic Neue", "Cormorant", "Crushed", 
+        "Edu", "Encode Sans Condensed", "Ephesis", "Fira Code", "Flow Rounded", 
+        "Fuzzy", "GFS", "Ga Maamli", "Gabarito", "Gentium Book Plus", "Homenaje", 
+        "Hubballi", "Ibarra Real Nova", "Jolly", "Jomhuria", "Jomolhari", "Josefin", 
+        "Jost", "Jura", "Just Another Hand", "Just Me Again", "K2D", "Kablammo", 
+        "Kadwa", "Kaisei", "Khand", "Lobster", "Livvic", "Liu Jian", "Literata", 
+        "Lisu Bosa", "Linefont", "Limelight", "Linden Hill", "Lobster Two", "Londrina", 
+        "Long Cang", "Lora", "Luxurious Script", "Mako", "Metrophobic", "Michroma", 
+        "Micro 5", "Milonga", "Monomaniac One", "Monoton", "Mukta", "NTR", "Notable", 
+        "Noto Sans", "Noto Serif", "Nova Slim", "Playwrite DE", "Qwitcher Grypen", 
+        "Rambla", "Ranchers", "Roboto Slab", "Rochester", "Rubik Iso", "Rubik Storm", 
+        "Rubik Vinyl", "Rubik Wet Paint", "Rudina", "Ruge Boogie", "Ruluko", 
+        "Rum Raisin", "Ruslan Display", "Russo One", "Ruthie", "Ruwudu", "Rye", 
+        "STIX Two Text", "Sacramento", "Sahitya", "Sail", "Saira", "Sancreek", 
+        "Sankofa Display", "Sansita", "Sofadi One", "Sofia Sans Semi Condensed", 
+        "Trykker", "Twinkle Star", "ZCOOL XiaoWei", "Zain", "Zen Antique", "Zen Dots"
+    ];
+
     getGoogleFonts(apiKey: string) {
-        const xhr = new XMLHttpRequest();
+        const xhr = newXMLHttpRequest();
         xhr.open('get', 'https://www.googleapis.com/webfonts/v1/webfonts?key=' + apiKey, true);
         xhr.onloadend = () => {
+            _this.fontList = JSON.parse(xhr.responseText);
+            var filteredFonts = _this.fontList.items.filter(function (font) {
+                return !_this.excludedFonts.some(function (excluded) {
+                    return font.family.startsWith(excluded);
+                });
+            });
+            filteredFonts.forEach(function (font) {
+                _this.addOption(_this.selectFamily, font.family);
+            });
+            
             this.fontList = JSON.parse(xhr.responseText);
-            this.fontList.items.forEach(font => this.addOption(this.selectFamily, font.family));
-            this.loadVariants();
-
             this.handleEvents();
-
             this.readQueryParams();
             this.renderCurrent();
         };
         xhr.send();
     }
+    
 
     callMakerjs(font: opentype.Font, text: string, size: number, union: boolean, filled: boolean, kerning: boolean, separate: boolean,
         bezierAccuracy: number, units: string, fill: string, stroke: string, strokeWidth: string, strokeNonScaling: boolean, fillRule: FillRule) {
